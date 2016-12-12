@@ -691,11 +691,11 @@ function makeYearlyTransactionsSixTimes(start_Day, last_Day, Year){
 
 function makeWeeklyTransactions(startTimeDay, lastTimeDay){
     COUNT1++;print("COUNT1 = "+COUNT1);
-    for(i=1; i<oneDayOfUser().len+1; i++){// we check the transaction list
+    for(i=1; i<StudentH.len+1; i++){// we check the transaction list
     
     	if(
-        	(oneDayOfUser().Period[i] === "Week") && 
-            (oneDayOfUser().Rate[i] === 1)){
+        	(StudentH.Period[i] === "Week") && 
+            (StudentH.Rate[i] === 1)){
 
             /*var transactionTimeDay = Math.floor(Math.random()*(lastTimeDay - startTimeDay) + startTimeDay);
             var transaction_Date = new Date();
@@ -728,11 +728,11 @@ function makeWeeklyTransactions(startTimeDay, lastTimeDay){
 
 function makeWeeklyTransactionsTriple(startTimeDay, lastTimeDay){
     COUNT++; print("COUNT = "+COUNT);
-    for(i=1; i<oneDayOfUser().len+1; i++){// we check the transaction list
+    for(i=1; i<StudentH.len+1; i++){// we check the transaction list
     	
     	if(
-        	(oneDayOfUser().Period[i] === "Week") && 
-            (oneDayOfUser().Rate[i] === 3)){
+        	(StudentH.Period[i] === "Week") && 
+            (StudentH.Rate[i] === 3)){
 
             /*var transactionTimeDays = makeThreeRandom(startTimeDay, lastTimeDay);// 
             // we have transactionTimeDays[0] to transactionTimeDays[2];
@@ -928,5 +928,5 @@ print("StudentH = "+StudentH.Period[2]);
 
 //runYearlyThreeAndSix("1/1/2010", "25/101/2016");//start date and final date - in my task 2016
 
-//runweeklyOneAndThree("1/1/2010", "25/11/2016");//start date and final date - in my task 2016
+runweeklyOneAndThree("1/1/2010", "25/11/2016");//start date and final date - in my task 2016
 
