@@ -2,6 +2,8 @@
 var NUMBER_OF_CATEGORY_NAMES = 4;//how many names are in one category
 var DATE_OF_DENOMINATION = new Date("2016-07-01");//the date of denomination, the constants
 var WEEK = 7;//days in a week
+var COUNT = 0;// for debug only
+var COUNT1 = 0;//for debug only
 
 function randomMoney(min, max){
     var amount = Math.floor(Math.random()*(max-min) + min);
@@ -304,56 +306,56 @@ function runMonthlyOneAndTwice(startDate, finishDate){// global function runs tr
         zDATE.setDate(zDATE.getDate()+1);
         print("### 1 now NOW DATE = "+zDATE);// 1-st February
 
-var cycleDATEstart,
-    cycleDATEfinish,
-    cycle_day_in_month,
-    cycleDay,
-    cycleMonth,
-    cycleYear,
-    bufferDay,
-    bufferMonth,
-    bufferYear;
-    do{
-        cycleDATEstart = zDATE;// first day of month
-        print("##cycleDATEstart - " + cycleDATEstart);
-        cycleDayFirst = zDATE.getDate();
-        print("cycleDay - " + cycleDayFirst);
-        cycleMonth = zDATE.getMonth();
-        print("cycleMonth - " + cycleMonth);//february = 1
-        cycleYear = zDATE.getFullYear();
-        print("cycleYear - " + cycleYear);
-        cycle_day_in_month = new Date(cycleYear, cycleMonth+1,0).getDate();//how many days in month - OK
-        print("##cycle_day_in_month - " + cycle_day_in_month);
+	var cycleDATEstart,
+	    cycleDATEfinish,
+	    cycle_day_in_month,
+	    cycleDay,
+	    cycleMonth,
+	    cycleYear,
+	    bufferDay,
+	    bufferMonth,
+	    bufferYear;
+	    do{
+	        cycleDATEstart = zDATE;// first day of month
+	        print("##cycleDATEstart - " + cycleDATEstart);
+	        cycleDayFirst = zDATE.getDate();
+	        print("cycleDay - " + cycleDayFirst);
+	        cycleMonth = zDATE.getMonth();
+	        print("cycleMonth - " + cycleMonth);//february = 1
+	        cycleYear = zDATE.getFullYear();
+	        print("cycleYear - " + cycleYear);
+	        cycle_day_in_month = new Date(cycleYear, cycleMonth+1,0).getDate();//how many days in month - OK
+	        print("##cycle_day_in_month - " + cycle_day_in_month);
 
-        bufferDay = cycleDATEstart.getDate();
-        bufferMonth = cycleDATEstart.getMonth();
-        bufferYear = cycleDATEstart.getFullYear();
+	        bufferDay = cycleDATEstart.getDate();
+	        bufferMonth = cycleDATEstart.getMonth();
+	        bufferYear = cycleDATEstart.getFullYear();
         
-        cycleDATEfinish = new Date(bufferYear, bufferMonth, bufferDay);//just now we have a clone
-        cycleDATEfinish.setDate(cycleDATEfinish.getDate()+cycle_day_in_month-1);
-        print("##cycleDATEfinish - " + cycleDATEfinish);
+	        cycleDATEfinish = new Date(bufferYear, bufferMonth, bufferDay);//just now we have a clone
+	        cycleDATEfinish.setDate(cycleDATEfinish.getDate()+cycle_day_in_month-1);
+	        print("##cycleDATEfinish - " + cycleDATEfinish);
     
-        if(cycleDATEfinish > finishDATE){
-            makeMonthlyTransactions(cycleDayFirst, finishDATE.getDate(), cycleMonth, cycleYear);
-            makeMonthlyTransactionsTwice(cycleDayFirst, finishDATE.getDate(), cycleMonth, cycleYear);
-            //we are in the last short month
-        }
-        else{
-            makeMonthlyTransactions(cycleDayFirst, cycle_day_in_month, cycleMonth, cycleYear);
-            makeMonthlyTransactionsTwice(cycleDayFirst, cycle_day_in_month, cycleMonth, cycleYear);
-            //we work with full month
-        }
+	        if(cycleDATEfinish > finishDATE){
+	            makeMonthlyTransactions(cycleDayFirst, finishDATE.getDate(), cycleMonth, cycleYear);
+	            makeMonthlyTransactionsTwice(cycleDayFirst, finishDATE.getDate(), cycleMonth, cycleYear);
+	            //we are in the last short month
+	        }
+	        else{
+	            makeMonthlyTransactions(cycleDayFirst, cycle_day_in_month, cycleMonth, cycleYear);
+	            makeMonthlyTransactionsTwice(cycleDayFirst, cycle_day_in_month, cycleMonth, cycleYear);
+	            //we work with full month
+	        }
     
-        bufferDay = cycleDATEfinish.getDate();
-        bufferMonth = cycleDATEfinish.getMonth();
-        bufferYear = cycleDATEfinish.getFullYear();
+	        bufferDay = cycleDATEfinish.getDate();
+	        bufferMonth = cycleDATEfinish.getMonth();
+	        bufferYear = cycleDATEfinish.getFullYear();
         
-        zDATE = new Date(bufferYear, bufferMonth, bufferDay);//just now we have a clone 
-        zDATE.setDate(cycleDATEfinish.getDate()+1);
-        print("##zDATE = cycleDATEfinish+1 = "+zDATE);
-        print("$$cycleDATEfinish - "+cycleDATEfinish);
-        print("$$finishDATE - "+finishDATE);
-    }while(cycleDATEfinish < finishDATE);
+	        zDATE = new Date(bufferYear, bufferMonth, bufferDay);//just now we have a clone 
+	        zDATE.setDate(cycleDATEfinish.getDate()+1);
+	        print("##zDATE = cycleDATEfinish+1 = "+zDATE);
+	        print("$$cycleDATEfinish - "+cycleDATEfinish);
+	        print("$$finishDATE - "+finishDATE);
+    	}while(cycleDATEfinish < finishDATE);
 }
 
 function DaysInYear(Year){
@@ -688,7 +690,8 @@ function makeYearlyTransactionsSixTimes(start_Day, last_Day, Year){
 };
 
 function makeWeeklyTransactions(startTimeDay, lastTimeDay){
-    for(i=1; i<oneDayOfUser().len+1; i++){// we check the transaction list
+    COUNT1++;print("COUNT1 = "+COUNT1);
+    /*for(i=1; i<oneDayOfUser().len+1; i++){// we check the transaction list
     
     	if(
         	(oneDayOfUser().Period[i] === "Week") && 
@@ -720,11 +723,12 @@ function makeWeeklyTransactions(startTimeDay, lastTimeDay){
                 }
             }
         }          
-	}
+	}*/
 }
 
 function makeWeeklyTransactionsTriple(startTimeDay, lastTimeDay){
-    for(i=1; i<oneDayOfUser().len+1; i++){// we check the transaction list
+    COUNT++; print("COUNT = "+COUNT);
+    /*for(i=1; i<oneDayOfUser().len+1; i++){// we check the transaction list
     	
     	if(
         	(oneDayOfUser().Period[i] === "Week") && 
@@ -797,7 +801,7 @@ function makeWeeklyTransactionsTriple(startTimeDay, lastTimeDay){
                 }
             }
         }          
-	}
+	}*/
 }
 
 function runYearlyThreeAndSix(startDate, finishDate){// global function runs transaction generation
@@ -899,7 +903,9 @@ function runweeklyOneAndThree(startDate, finishDate){// global function runs tra
     do{
         cycleTimeDayStart = zTimeDay;// 1-st day of the next week
         cycleTimeDayFinish = cycleTimeDayStart + WEEK - 1;// last day of the next week
-
+        print("##cycleTimeDayStart = "+cycleTimeDayStart);
+        print("##cycleTimeDayFinish = "+cycleTimeDayFinish);
+        print("##finishTimeDay = "+finishTimeDay);
         if(cycleTimeDayFinish <= finishTimeDay){
             makeWeeklyTransactions(cycleTimeDayStart, cycleTimeDayFinish);
             makeWeeklyTransactionsTriple(cycleTimeDayStart, cycleTimeDayFinish);
@@ -915,9 +921,9 @@ function runweeklyOneAndThree(startDate, finishDate){// global function runs tra
 
 /*--------------------- this three functions run three periods of transactions - month, year, week -----------------*/
 
-runMonthlyOneAndTwice("1/1/2010", "25/11/2016");//start date and final date - in my task 2016
+//runMonthlyOneAndTwice("1/1/2010", "25/11/2016");//start date and final date - in my task 2016
 
-runYearlyThreeAndSix("1/1/2010", "25/101/2016");//start date and final date - in my task 2016
+//runYearlyThreeAndSix("1/1/2010", "25/101/2016");//start date and final date - in my task 2016
 
 runweeklyOneAndThree("1/1/2010", "25/11/2016");//start date and final date - in my task 2016
 
