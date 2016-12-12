@@ -66,12 +66,6 @@ function standartDate(anyDay){// this function normalize string date into a Date
 }
 
 
-function RandomAmount(AmountMin, AmountMax, Currency){
-    var result ;
-        result = randomMoney(AmountMin, AmountMax);
-    return result;
-}//RandomAmount returns random result 
-
 function WriteTransaction(Date, Type, Category, Name, Amount, Currency, Account){
     //Date is in standart format
     db.transactions.insert({"Date": Date, "Type": Type, "Category": Category, "Name": Name,
@@ -96,7 +90,7 @@ function makeMonthlyTransactions(start_Day, finish_Day, Month, Year){// we check
             transaction_Date.setMonth(Month);
             transaction_Date.setDate(transactionDay);
             //print("@@Full transaction date is"+transaction_Date);
-            var transactionAmount = RandomAmount(StudentH.AmountMin[i], StudentH.AmountMax[i],StudentH.Currency[i])//returns  amount 
+            var transactionAmount = randomMoney(StudentH.AmountMin[i], StudentH.AmountMax[i])//returns  amount 
             // make a monthly transaction, we need to call random day
             var Number_of_the_name_of_transaction = Math.floor((Math.random()*NUMBER_OF_CATEGORY_NAMES));//0...NUMBER-1
             // Math.random()<1 that`s why name_of_transactions<NUMBER_OF_CATEGORY_NAMES
@@ -202,8 +196,8 @@ function makeMonthlyTransactionsTwice(start_Day, finish_Day, Month, Year){
             print("@@Full transaction date1 is"+transaction_Date1);
             print("@@Full transaction date2 is"+transaction_Date2);
 
-            var transactionAmount1 = RandomAmount(StudentH.AmountMin[i], StudentH.AmountMax[i],StudentH.Currency[i])//returns  amount 
-            var transactionAmount2 = RandomAmount(StudentH.AmountMin[i], StudentH.AmountMax[i],StudentH.Currency[i])//returns  amount
+            var transactionAmount1 = randomMoney(StudentH.AmountMin[i], StudentH.AmountMax[i])//returns  amount 
+            var transactionAmount2 = randomMoney(StudentH.AmountMin[i], StudentH.AmountMax[i])//returns  amount
             // make a monthly transaction, we need to call random day
             var Number_of_the_name_of_transaction1 = Math.floor((Math.random()*NUMBER_OF_CATEGORY_NAMES));//0...NUMBER-1
             var Number_of_the_name_of_transaction2 = Math.floor((Math.random()*NUMBER_OF_CATEGORY_NAMES));//0...NUMBER-1
@@ -400,9 +394,9 @@ function makeYearlyTransactionsTriple(start_Day, last_Day, Year){
             print("@@Full transaction date2 is"+transaction_Date2);
             print("@@Full transaction date3 is"+transaction_Date3);
 
-            var transactionAmount1 = RandomAmount(StudentH.AmountMin[i], StudentH.AmountMax[i],StudentH.Currency[i])//returns  amount 
-            var transactionAmount2 = RandomAmount(StudentH.AmountMin[i], StudentH.AmountMax[i],StudentH.Currency[i])//returns  amount
-            var transactionAmount3 = RandomAmount(StudentH.AmountMin[i], StudentH.AmountMax[i],StudentH.Currency[i])//returns  amount
+            var transactionAmount1 = randomMoney(StudentH.AmountMin[i], StudentH.AmountMax[i])//returns  amount 
+            var transactionAmount2 = randomMoney(StudentH.AmountMin[i], StudentH.AmountMax[i])//returns  amount
+            var transactionAmount3 = randomMoney(StudentH.AmountMin[i], StudentH.AmountMax[i])//returns  amount
             // make a monthly transaction, we need to call random day
             var Number_of_the_name_of_transaction1 = Math.floor((Math.random()*NUMBER_OF_CATEGORY_NAMES));//0...NUMBER-1
             var Number_of_the_name_of_transaction2 = Math.floor((Math.random()*NUMBER_OF_CATEGORY_NAMES));//0...NUMBER-1
@@ -524,12 +518,12 @@ function makeYearlyTransactionsSixTimes(start_Day, last_Day, Year){
             print("@@Full transaction date5 is"+transaction_Date5);
             print("@@Full transaction date6 is"+transaction_Date6);
 
-            var transactionAmount1 = RandomAmount(StudentH.AmountMin[i], StudentH.AmountMax[i],StudentH.Currency[i])//returns  amount 
-            var transactionAmount2 = RandomAmount(StudentH.AmountMin[i], StudentH.AmountMax[i],StudentH.Currency[i])//returns  amount
-            var transactionAmount3 = RandomAmount(StudentH.AmountMin[i], StudentH.AmountMax[i],StudentH.Currency[i])//returns  amount
-            var transactionAmount4 = RandomAmount(StudentH.AmountMin[i], StudentH.AmountMax[i],StudentH.Currency[i])//returns  amount
-            var transactionAmount5 = RandomAmount(StudentH.AmountMin[i], StudentH.AmountMax[i],StudentH.Currency[i])//returns  amount
-            var transactionAmount6 = RandomAmount(StudentH.AmountMin[i], StudentH.AmountMax[i],StudentH.Currency[i])//returns  amount
+            var transactionAmount1 = randomMoney(StudentH.AmountMin[i], StudentH.AmountMax[i])//returns  amount 
+            var transactionAmount2 = randomMoney(StudentH.AmountMin[i], StudentH.AmountMax[i])//returns  amount
+            var transactionAmount3 = randomMoney(StudentH.AmountMin[i], StudentH.AmountMax[i])//returns  amount
+            var transactionAmount4 = randomMoney(StudentH.AmountMin[i], StudentH.AmountMax[i])//returns  amount
+            var transactionAmount5 = randomMoney(StudentH.AmountMin[i], StudentH.AmountMax[i])//returns  amount
+            var transactionAmount6 = randomMoney(StudentH.AmountMin[i], StudentH.AmountMax[i])//returns  amount
             // make a monthly transaction, we need to call random day
             var Number_of_the_name_of_transaction1 = Math.floor((Math.random()*NUMBER_OF_CATEGORY_NAMES));//0...NUMBER-1
             var Number_of_the_name_of_transaction2 = Math.floor((Math.random()*NUMBER_OF_CATEGORY_NAMES));//0...NUMBER-1
@@ -689,7 +683,7 @@ function makeWeeklyTransactions(startTimeDay, lastTimeDay){
             var transactionTimeDay = Math.floor(Math.random()*(lastTimeDay - startTimeDay) + startTimeDay);
             var transaction_Date = new Date();
             transaction_Date.setTime(transactionTimeDay*1000*60*60*24);// Data object format
-            var transactionAmount = RandomAmount(StudentH.AmountMin[i], StudentH.AmountMax[i],StudentH.Currency[i])//returns  amount
+            var transactionAmount = randomMoney(StudentH.AmountMin[i], StudentH.AmountMax[i])//returns  amount
             var Number_of_the_name_of_transaction = Math.floor((Math.random()*NUMBER_OF_CATEGORY_NAMES));//0...NUMBER-1
             var operationName =  StudentH.OperationName[i]
             var transactionNameH = db.names.find({"transaction":StudentH.OperationName[i]},{"names":1,_id:0}).toArray();
@@ -733,9 +727,9 @@ function makeWeeklyTransactionsTriple(startTimeDay, lastTimeDay){
             transaction_Date3.setTime(transactionTimeDays[2]*1000*60*60*24);// Data object format
             // we have transaction_Date1...transaction_Date3
 
-            var transactionAmount1 = RandomAmount(StudentH.AmountMin[i], StudentH.AmountMax[i],StudentH.Currency[i])//returns  amount
-            var transactionAmount2 = RandomAmount(StudentH.AmountMin[i], StudentH.AmountMax[i],StudentH.Currency[i])//returns  amount
-            var transactionAmount3 = RandomAmount(StudentH.AmountMin[i], StudentH.AmountMax[i],StudentH.Currency[i])//returns  amount
+            var transactionAmount1 = randomMoney(StudentH.AmountMin[i], StudentH.AmountMax[i])//returns  amount
+            var transactionAmount2 = randomMoney(StudentH.AmountMin[i], StudentH.AmountMax[i])//returns  amount
+            var transactionAmount3 = randomMoney(StudentH.AmountMin[i], StudentH.AmountMax[i])//returns  amount
             var Number_of_the_name_of_transaction1 = Math.floor((Math.random()*NUMBER_OF_CATEGORY_NAMES));//0...NUMBER-1
             var Number_of_the_name_of_transaction2 = Math.floor((Math.random()*NUMBER_OF_CATEGORY_NAMES));//0...NUMBER-1
             var Number_of_the_name_of_transaction3 = Math.floor((Math.random()*NUMBER_OF_CATEGORY_NAMES));//0...NUMBER-1
