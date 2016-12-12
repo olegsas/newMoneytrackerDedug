@@ -66,17 +66,6 @@ function standartDate(anyDay){// this function normalize string date into a Date
 }
 
 
-function plusWeek(nowDay){// function finds a period in 1 week for a transactions
-    var pointOne = standartDate(nowDay)//start day
-    var day = (pointOne.getDate());// day of a week in range 0...6
-
-    var pointTwo = pointOne;// we assign pointOne to pointTwo because we gonna use a method setDate()
-    var x = pointTwo.setDate(day+10);
-    return pointTwo;
-}    
-   /*print(plusWeek("1/1/2010"));
-   /*var now = new Date();*/
-  /* print(new Date(2016,12,0).getDate());*/
 function RandomAmount(AmountMin, AmountMax, Currency){
     var result ;
         result = randomMoney(AmountMin, AmountMax);
@@ -93,13 +82,13 @@ function makeMonthlyTransactions(start_Day, finish_Day, Month, Year){// we check
     //there are arrays typeA[1]...typeA[length] - for every transaction
     // if we have a full month then start_Day is 1 and if we have the first month we use the start_Day
     
-    for(i=1; i<oneDayOfUser().len+1; i++){// we check the transaction list
+    for(i=1; i<StudentH.len+1; i++){// we check the transaction list
         //print("i="+i);
         //print("oneDayOfUser().Period[i] = "+ oneDayOfUser().Period[i]);
         //print("oneDayOfUser().Rate[i] = "+ oneDayOfUser().Rate[i]);
         if(
-            (oneDayOfUser().Period[i] === "Month") && 
-            (oneDayOfUser().Rate[i] === 1)){
+            (StudentH.Period[i] === "Month") && 
+            (StudentH.Rate[i] === 1)){
         
             var transactionDay = Math.floor(Math.random()*(finish_Day - start_Day) + start_Day);
             var transaction_Date = new Date();// we convert it into an object format
@@ -107,19 +96,19 @@ function makeMonthlyTransactions(start_Day, finish_Day, Month, Year){// we check
             transaction_Date.setMonth(Month);
             transaction_Date.setDate(transactionDay);
             //print("@@Full transaction date is"+transaction_Date);
-            var transactionAmount = RandomAmount(oneDayOfUser().AmountMin[i], oneDayOfUser().AmountMax[i],oneDayOfUser().Currency[i])//returns  amount 
+            var transactionAmount = RandomAmount(StudentH.AmountMin[i], StudentH.AmountMax[i],StudentH.Currency[i])//returns  amount 
             // make a monthly transaction, we need to call random day
             var Number_of_the_name_of_transaction = Math.floor((Math.random()*NUMBER_OF_CATEGORY_NAMES));//0...NUMBER-1
             // Math.random()<1 that`s why name_of_transactions<NUMBER_OF_CATEGORY_NAMES
-            var operationName =  oneDayOfUser().OperationName[i]
-            var transactionNameH = db.names.find({"transaction":oneDayOfUser().OperationName[i]},{"names":1,_id:0}).toArray();
+            var operationName =  StudentH.OperationName[i]
+            var transactionNameH = db.names.find({"transaction":StudentH.OperationName[i]},{"names":1,_id:0}).toArray();
             // we have an object from the cursor with transactions names of the operation
             //print("transactionName array - " + transactionNameH[0].names);
             var transactionNameOnly = transactionNameH[0].names[Number_of_the_name_of_transaction];
             //print("name of any transaction = "+ transactionNameOnly);
-            var transactionType = oneDayOfUser().Type[i];
-            var transactionCurrency = oneDayOfUser().Currency[i];
-            var transactionAccount = oneDayOfUser().Account[i];
+            var transactionType = StudentH.Type[i];
+            var transactionCurrency = StudentH.Currency[i];
+            var transactionAccount = StudentH.Account[i];
             /*=============================*/
             // we have
             // transactionNameOnly - the name of the transaction
@@ -134,14 +123,14 @@ function makeMonthlyTransactions(start_Day, finish_Day, Month, Year){// we check
 
             
             if(transaction_Date >= DATE_OF_DENOMINATION){
-                if((oneDayOfUser().Currency[i] === "Byn") || (oneDayOfUser().Currency[i] === "Usd")){
+                if((StudentH.Currency[i] === "Byn") || (StudentH.Currency[i] === "Usd")){
                     WriteTransaction(transaction_Date,transactionType, operationName, transactionNameOnly, 
                              transactionAmount, transactionCurrency, transactionAccount)
                 }
             }
 
             if(transaction_Date < DATE_OF_DENOMINATION){
-                if((oneDayOfUser().Currency[i] === "Byr") || (oneDayOfUser().Currency[i] === "Usd")){
+                if((StudentH.Currency[i] === "Byr") || (StudentH.Currency[i] === "Usd")){
                     WriteTransaction(transaction_Date,transactionType, operationName, transactionNameOnly, 
                              transactionAmount, transactionCurrency, transactionAccount)
                 }
@@ -189,13 +178,13 @@ return arr;
 }
 
 function makeMonthlyTransactionsTwice(start_Day, finish_Day, Month, Year){
-    for(i=1; i<oneDayOfUser().len+1; i++){// we check the transaction list
+    for(i=1; i<StudentH.len+1; i++){// we check the transaction list
         print("i="+i);
-        print("oneDayOfUser().Period[i] = "+ oneDayOfUser().Period[i]);
-        print("oneDayOfUser().Rate[i] = "+ oneDayOfUser().Rate[i]);
+        print("oneDayOfUser().Period[i] = "+ StudentH.Period[i]);
+        print("oneDayOfUser().Rate[i] = "+ StudentH.Rate[i]);
         if(
-            (oneDayOfUser().Period[i] === "Month") && 
-            (oneDayOfUser().Rate[i] === 2)){
+            (StudentH.Period[i] === "Month") && 
+            (StudentH.Rate[i] === 2)){
         
             var transactionDays = makeTwoRandom(start_Day, finish_Day);// 
             // we have transactionDays[0] and transactionDays[1];
@@ -213,14 +202,14 @@ function makeMonthlyTransactionsTwice(start_Day, finish_Day, Month, Year){
             print("@@Full transaction date1 is"+transaction_Date1);
             print("@@Full transaction date2 is"+transaction_Date2);
 
-            var transactionAmount1 = RandomAmount(oneDayOfUser().AmountMin[i], oneDayOfUser().AmountMax[i],oneDayOfUser().Currency[i])//returns  amount 
-            var transactionAmount2 = RandomAmount(oneDayOfUser().AmountMin[i], oneDayOfUser().AmountMax[i],oneDayOfUser().Currency[i])//returns  amount
+            var transactionAmount1 = RandomAmount(StudentH.AmountMin[i], StudentH.AmountMax[i],StudentH.Currency[i])//returns  amount 
+            var transactionAmount2 = RandomAmount(StudentH.AmountMin[i], StudentH.AmountMax[i],StudentH.Currency[i])//returns  amount
             // make a monthly transaction, we need to call random day
             var Number_of_the_name_of_transaction1 = Math.floor((Math.random()*NUMBER_OF_CATEGORY_NAMES));//0...NUMBER-1
             var Number_of_the_name_of_transaction2 = Math.floor((Math.random()*NUMBER_OF_CATEGORY_NAMES));//0...NUMBER-1
             // Math.random()<1 that`s why name_of_transactions<NUMBER_OF_CATEGORY_NAMES
-            var operationName =  oneDayOfUser().OperationName[i]
-            var transactionNameH = db.names.find({"transaction":oneDayOfUser().OperationName[i]},{"names":1,_id:0}).toArray();
+            var operationName =  StudentH.OperationName[i]
+            var transactionNameH = db.names.find({"transaction":StudentH.OperationName[i]},{"names":1,_id:0}).toArray();
             // we have an object from the cursor with transactions names of the operation
             print("transactionName array - " + transactionNameH[0].names);
             var transactionNameOnly1 = transactionNameH[0].names[Number_of_the_name_of_transaction1];
@@ -228,9 +217,9 @@ function makeMonthlyTransactionsTwice(start_Day, finish_Day, Month, Year){
             print("name of any transaction1 = "+ transactionNameOnly1);
             print("name of any transaction2 = "+ transactionNameOnly2);
 
-            var transactionType = oneDayOfUser().Type[i];
-            var transactionCurrency = oneDayOfUser().Currency[i];
-            var transactionAccount = oneDayOfUser().Account[i];
+            var transactionType = StudentH.Type[i];
+            var transactionCurrency = StudentH.Currency[i];
+            var transactionAccount = StudentH.Account[i];
             /*=============================*/
             // we have
             // transactionNameOnly1 - the name of the transaction
@@ -248,14 +237,14 @@ function makeMonthlyTransactionsTwice(start_Day, finish_Day, Month, Year){
 
             
             if(transaction_Date1 >= DATE_OF_DENOMINATION){
-                if((oneDayOfUser().Currency[i] === "Byn") || (oneDayOfUser().Currency[i] === "Usd")){
+                if((StudentH.Currency[i] === "Byn") || (StudentH.Currency[i] === "Usd")){
                     WriteTransaction(transaction_Date1,transactionType, operationName, transactionNameOnly1, 
                              transactionAmount1, transactionCurrency, transactionAccount)
                 }
             }
 
             if(transaction_Date1 < DATE_OF_DENOMINATION){
-                if((oneDayOfUser().Currency[i] === "Byr") || (oneDayOfUser().Currency[i] === "Usd")){
+                if((StudentH.Currency[i] === "Byr") || (StudentH.Currency[i] === "Usd")){
                     WriteTransaction(transaction_Date1,transactionType, operationName, transactionNameOnly1, 
                              transactionAmount1, transactionCurrency, transactionAccount)
                 }
@@ -264,14 +253,14 @@ function makeMonthlyTransactionsTwice(start_Day, finish_Day, Month, Year){
             // use all this variables);//we write a transaction and only we need to give a random name for it
 
           if(transaction_Date2 >= DATE_OF_DENOMINATION){
-                if((oneDayOfUser().Currency[i] === "Byn") || (oneDayOfUser().Currency[i] === "Usd")){
+                if((StudentH.Currency[i] === "Byn") || (StudentH.Currency[i] === "Usd")){
                     WriteTransaction(transaction_Date2,transactionType, operationName, transactionNameOnly2, 
                              transactionAmount2, transactionCurrency, transactionAccount)
                 }
             }
 
             if(transaction_Date2 < DATE_OF_DENOMINATION){
-                if((oneDayOfUser().Currency[i] === "Byr") || (oneDayOfUser().Currency[i] === "Usd")){
+                if((StudentH.Currency[i] === "Byr") || (StudentH.Currency[i] === "Usd")){
                     WriteTransaction(transaction_Date2,transactionType, operationName, transactionNameOnly2, 
                              transactionAmount2, transactionCurrency, transactionAccount)
                 }
@@ -389,13 +378,13 @@ function toPlainDays(anyDate, anyMonth, anyYear){//returns tow many days between
 
 
 function makeYearlyTransactionsTriple(start_Day, last_Day, Year){
-    for(i=1; i<oneDayOfUser().len+1; i++){// we check the transaction list
+    for(i=1; i<StudentH.len+1; i++){// we check the transaction list
         print("i="+i);
-        print("oneDayOfUser().Period[i] = "+ oneDayOfUser().Period[i]);
-        print("oneDayOfUser().Rate[i] = "+ oneDayOfUser().Rate[i]);
+        print("oneDayOfUser().Period[i] = "+ StudentH.Period[i]);
+        print("oneDayOfUser().Rate[i] = "+ StudentH.Rate[i]);
         if(
-            (oneDayOfUser().Period[i] === "Year") && 
-            (oneDayOfUser().Rate[i] === 3)){
+            (StudentH.Period[i] === "Year") && 
+            (StudentH.Rate[i] === 3)){
         
             var transactionDays = makeThreeRandom(start_Day, last_Day);// 
             // we have transactionDays[0] to transactionDays[2];
@@ -411,16 +400,16 @@ function makeYearlyTransactionsTriple(start_Day, last_Day, Year){
             print("@@Full transaction date2 is"+transaction_Date2);
             print("@@Full transaction date3 is"+transaction_Date3);
 
-            var transactionAmount1 = RandomAmount(oneDayOfUser().AmountMin[i], oneDayOfUser().AmountMax[i],oneDayOfUser().Currency[i])//returns  amount 
-            var transactionAmount2 = RandomAmount(oneDayOfUser().AmountMin[i], oneDayOfUser().AmountMax[i],oneDayOfUser().Currency[i])//returns  amount
-            var transactionAmount3 = RandomAmount(oneDayOfUser().AmountMin[i], oneDayOfUser().AmountMax[i],oneDayOfUser().Currency[i])//returns  amount
+            var transactionAmount1 = RandomAmount(StudentH.AmountMin[i], StudentH.AmountMax[i],StudentH.Currency[i])//returns  amount 
+            var transactionAmount2 = RandomAmount(StudentH.AmountMin[i], StudentH.AmountMax[i],StudentH.Currency[i])//returns  amount
+            var transactionAmount3 = RandomAmount(StudentH.AmountMin[i], StudentH.AmountMax[i],StudentH.Currency[i])//returns  amount
             // make a monthly transaction, we need to call random day
             var Number_of_the_name_of_transaction1 = Math.floor((Math.random()*NUMBER_OF_CATEGORY_NAMES));//0...NUMBER-1
             var Number_of_the_name_of_transaction2 = Math.floor((Math.random()*NUMBER_OF_CATEGORY_NAMES));//0...NUMBER-1
             var Number_of_the_name_of_transaction3 = Math.floor((Math.random()*NUMBER_OF_CATEGORY_NAMES));//0...NUMBER-1
             // Math.random()<1 that`s why name_of_transactions<NUMBER_OF_CATEGORY_NAMES
-            var operationName =  oneDayOfUser().OperationName[i]
-            var transactionNameH = db.names.find({"transaction":oneDayOfUser().OperationName[i]},{"names":1,_id:0}).toArray();
+            var operationName =  StudentH.OperationName[i]
+            var transactionNameH = db.names.find({"transaction":StudentH.OperationName[i]},{"names":1,_id:0}).toArray();
             // we have an object from the cursor with transactions names of the operation
             print("transactionName array - " + transactionNameH[0].names);
             var transactionNameOnly1 = transactionNameH[0].names[Number_of_the_name_of_transaction1];
@@ -430,9 +419,9 @@ function makeYearlyTransactionsTriple(start_Day, last_Day, Year){
             print("name of any transaction2 = "+ transactionNameOnly2);
             print("name of any transaction3 = "+ transactionNameOnly3);
 
-            var transactionType = oneDayOfUser().Type[i];
-            var transactionCurrency = oneDayOfUser().Currency[i];
-            var transactionAccount = oneDayOfUser().Account[i];
+            var transactionType = StudentH.Type[i];
+            var transactionCurrency = StudentH.Currency[i];
+            var transactionAccount = StudentH.Account[i];
             /*=============================*/
             // we have
             // transactionNameOnly1 - the name of the transaction
@@ -450,14 +439,14 @@ function makeYearlyTransactionsTriple(start_Day, last_Day, Year){
 
             
             if(transaction_Date1 >= DATE_OF_DENOMINATION){
-                if((oneDayOfUser().Currency[i] === "Byn") || (oneDayOfUser().Currency[i] === "Usd")){
+                if((StudentH.Currency[i] === "Byn") || (StudentH.Currency[i] === "Usd")){
                     WriteTransaction(transaction_Date1,transactionType, operationName, transactionNameOnly1, 
                              transactionAmount1, transactionCurrency, transactionAccount)
                 }
             }
 
             if(transaction_Date1 < DATE_OF_DENOMINATION){
-                if((oneDayOfUser().Currency[i] === "Byr") || (oneDayOfUser().Currency[i] === "Usd")){
+                if((StudentH.Currency[i] === "Byr") || (StudentH.Currency[i] === "Usd")){
                     WriteTransaction(transaction_Date1,transactionType, operationName, transactionNameOnly1, 
                              transactionAmount1, transactionCurrency, transactionAccount)
                 }
@@ -466,14 +455,14 @@ function makeYearlyTransactionsTriple(start_Day, last_Day, Year){
             // use all this variables);//we write a transaction and only we need to give a random name for it
 
           	if(transaction_Date2 >= DATE_OF_DENOMINATION){
-                if((oneDayOfUser().Currency[i] === "Byn") || (oneDayOfUser().Currency[i] === "Usd")){
+                if((StudentH.Currency[i] === "Byn") || (StudentH.Currency[i] === "Usd")){
                     WriteTransaction(transaction_Date2,transactionType, operationName, transactionNameOnly2, 
                              transactionAmount2, transactionCurrency, transactionAccount)
                 }
             }
 
             if(transaction_Date2 < DATE_OF_DENOMINATION){
-                if((oneDayOfUser().Currency[i] === "Byr") || (oneDayOfUser().Currency[i] === "Usd")){
+                if((StudentH.Currency[i] === "Byr") || (StudentH.Currency[i] === "Usd")){
                     WriteTransaction(transaction_Date2,transactionType, operationName, transactionNameOnly2, 
                              transactionAmount2, transactionCurrency, transactionAccount)
                 }
@@ -483,14 +472,14 @@ function makeYearlyTransactionsTriple(start_Day, last_Day, Year){
             // use all this variables);//we write a transaction and only we need to give a random name for it
 
             if(transaction_Date3 >= DATE_OF_DENOMINATION){
-                if((oneDayOfUser().Currency[i] === "Byn") || (oneDayOfUser().Currency[i] === "Usd")){
+                if((StudentH.Currency[i] === "Byn") || (StudentH.Currency[i] === "Usd")){
                     WriteTransaction(transaction_Date3,transactionType, operationName, transactionNameOnly3, 
                              transactionAmount3, transactionCurrency, transactionAccount)
                 }
             }
 
             if(transaction_Date3 < DATE_OF_DENOMINATION){
-                if((oneDayOfUser().Currency[i] === "Byr") || (oneDayOfUser().Currency[i] === "Usd")){
+                if((StudentH.Currency[i] === "Byr") || (StudentH.Currency[i] === "Usd")){
                     WriteTransaction(transaction_Date3,transactionType, operationName, transactionNameOnly3, 
                              transactionAmount3, transactionCurrency, transactionAccount)
                 }
@@ -505,13 +494,13 @@ function makeYearlyTransactionsTriple(start_Day, last_Day, Year){
 };
 
 function makeYearlyTransactionsSixTimes(start_Day, last_Day, Year){
-    for(i=1; i<oneDayOfUser().len+1; i++){// we check the transaction list
+    for(i=1; i<StudentH.len+1; i++){// we check the transaction list
         print("i="+i);
-        print("oneDayOfUser().Period[i] = "+ oneDayOfUser().Period[i]);
-        print("oneDayOfUser().Rate[i] = "+ oneDayOfUser().Rate[i]);
+        print("oneDayOfUser().Period[i] = "+ StudentH.Period[i]);
+        print("oneDayOfUser().Rate[i] = "+ StudentH.Rate[i]);
         if(
-            (oneDayOfUser().Period[i] === "Year") && 
-            (oneDayOfUser().Rate[i] === 6)){
+            (StudentH.Period[i] === "Year") && 
+            (StudentH.Rate[i] === 6)){
         
             var transactionDays = makeSixRandom(start_Day, last_Day);// 
             // we have transactionDays[0] to transactionDays[5];
@@ -535,12 +524,12 @@ function makeYearlyTransactionsSixTimes(start_Day, last_Day, Year){
             print("@@Full transaction date5 is"+transaction_Date5);
             print("@@Full transaction date6 is"+transaction_Date6);
 
-            var transactionAmount1 = RandomAmount(oneDayOfUser().AmountMin[i], oneDayOfUser().AmountMax[i],oneDayOfUser().Currency[i])//returns  amount 
-            var transactionAmount2 = RandomAmount(oneDayOfUser().AmountMin[i], oneDayOfUser().AmountMax[i],oneDayOfUser().Currency[i])//returns  amount
-            var transactionAmount3 = RandomAmount(oneDayOfUser().AmountMin[i], oneDayOfUser().AmountMax[i],oneDayOfUser().Currency[i])//returns  amount
-            var transactionAmount4 = RandomAmount(oneDayOfUser().AmountMin[i], oneDayOfUser().AmountMax[i],oneDayOfUser().Currency[i])//returns  amount
-            var transactionAmount5 = RandomAmount(oneDayOfUser().AmountMin[i], oneDayOfUser().AmountMax[i],oneDayOfUser().Currency[i])//returns  amount
-            var transactionAmount6 = RandomAmount(oneDayOfUser().AmountMin[i], oneDayOfUser().AmountMax[i],oneDayOfUser().Currency[i])//returns  amount
+            var transactionAmount1 = RandomAmount(StudentH.AmountMin[i], StudentH.AmountMax[i],StudentH.Currency[i])//returns  amount 
+            var transactionAmount2 = RandomAmount(StudentH.AmountMin[i], StudentH.AmountMax[i],StudentH.Currency[i])//returns  amount
+            var transactionAmount3 = RandomAmount(StudentH.AmountMin[i], StudentH.AmountMax[i],StudentH.Currency[i])//returns  amount
+            var transactionAmount4 = RandomAmount(StudentH.AmountMin[i], StudentH.AmountMax[i],StudentH.Currency[i])//returns  amount
+            var transactionAmount5 = RandomAmount(StudentH.AmountMin[i], StudentH.AmountMax[i],StudentH.Currency[i])//returns  amount
+            var transactionAmount6 = RandomAmount(StudentH.AmountMin[i], StudentH.AmountMax[i],StudentH.Currency[i])//returns  amount
             // make a monthly transaction, we need to call random day
             var Number_of_the_name_of_transaction1 = Math.floor((Math.random()*NUMBER_OF_CATEGORY_NAMES));//0...NUMBER-1
             var Number_of_the_name_of_transaction2 = Math.floor((Math.random()*NUMBER_OF_CATEGORY_NAMES));//0...NUMBER-1
@@ -549,8 +538,8 @@ function makeYearlyTransactionsSixTimes(start_Day, last_Day, Year){
             var Number_of_the_name_of_transaction5 = Math.floor((Math.random()*NUMBER_OF_CATEGORY_NAMES));//0...NUMBER-1
             var Number_of_the_name_of_transaction6 = Math.floor((Math.random()*NUMBER_OF_CATEGORY_NAMES));//0...NUMBER-1
             // Math.random()<1 that`s why name_of_transactions<NUMBER_OF_CATEGORY_NAMES
-            var operationName =  oneDayOfUser().OperationName[i]
-            var transactionNameH = db.names.find({"transaction":oneDayOfUser().OperationName[i]},{"names":1,_id:0}).toArray();
+            var operationName =  StudentH.OperationName[i]
+            var transactionNameH = db.names.find({"transaction":StudentH.OperationName[i]},{"names":1,_id:0}).toArray();
             // we have an object from the cursor with transactions names of the operation
             print("transactionName array - " + transactionNameH[0].names);
             var transactionNameOnly1 = transactionNameH[0].names[Number_of_the_name_of_transaction1];
@@ -566,9 +555,9 @@ function makeYearlyTransactionsSixTimes(start_Day, last_Day, Year){
             print("name of any transaction5 = "+ transactionNameOnly5);
             print("name of any transaction6 = "+ transactionNameOnly6);
 
-            var transactionType = oneDayOfUser().Type[i];
-            var transactionCurrency = oneDayOfUser().Currency[i];
-            var transactionAccount = oneDayOfUser().Account[i];
+            var transactionType = StudentH.Type[i];
+            var transactionCurrency = StudentH.Currency[i];
+            var transactionAccount = StudentH.Account[i];
             /*=============================*/
             // we have
             // transactionNameOnly1 - the name of the transaction
@@ -586,14 +575,14 @@ function makeYearlyTransactionsSixTimes(start_Day, last_Day, Year){
 
             
             if(transaction_Date1 >= DATE_OF_DENOMINATION){
-                if((oneDayOfUser().Currency[i] === "Byn") || (oneDayOfUser().Currency[i] === "Usd")){
+                if((StudentH.Currency[i] === "Byn") || (StudentH.Currency[i] === "Usd")){
                     WriteTransaction(transaction_Date1,transactionType, operationName, transactionNameOnly1, 
                              transactionAmount1, transactionCurrency, transactionAccount)
                 }
             }
 
             if(transaction_Date1 < DATE_OF_DENOMINATION){
-                if((oneDayOfUser().Currency[i] === "Byr") || (oneDayOfUser().Currency[i] === "Usd")){
+                if((StudentH.Currency[i] === "Byr") || (StudentH.Currency[i] === "Usd")){
                     WriteTransaction(transaction_Date1,transactionType, operationName, transactionNameOnly1, 
                              transactionAmount1, transactionCurrency, transactionAccount)
                 }
@@ -602,14 +591,14 @@ function makeYearlyTransactionsSixTimes(start_Day, last_Day, Year){
             // use all this variables);//we write a transaction and only we need to give a random name for it
 
           	if(transaction_Date2 >= DATE_OF_DENOMINATION){
-                if((oneDayOfUser().Currency[i] === "Byn") || (oneDayOfUser().Currency[i] === "Usd")){
+                if((StudentH.Currency[i] === "Byn") || (StudentH.Currency[i] === "Usd")){
                     WriteTransaction(transaction_Date2,transactionType, operationName, transactionNameOnly2, 
                              transactionAmount2, transactionCurrency, transactionAccount)
                 }
             }
 
             if(transaction_Date2 < DATE_OF_DENOMINATION){
-                if((oneDayOfUser().Currency[i] === "Byr") || (oneDayOfUser().Currency[i] === "Usd")){
+                if((StudentH.Currency[i] === "Byr") || (StudentH.Currency[i] === "Usd")){
                     WriteTransaction(transaction_Date2,transactionType, operationName, transactionNameOnly2, 
                              transactionAmount2, transactionCurrency, transactionAccount)
                 }
@@ -619,14 +608,14 @@ function makeYearlyTransactionsSixTimes(start_Day, last_Day, Year){
             // use all this variables);//we write a transaction and only we need to give a random name for it
 
             if(transaction_Date3 >= DATE_OF_DENOMINATION){
-                if((oneDayOfUser().Currency[i] === "Byn") || (oneDayOfUser().Currency[i] === "Usd")){
+                if((StudentH.Currency[i] === "Byn") || (StudentH.Currency[i] === "Usd")){
                     WriteTransaction(transaction_Date3,transactionType, operationName, transactionNameOnly3, 
                              transactionAmount3, transactionCurrency, transactionAccount)
                 }
             }
 
             if(transaction_Date3 < DATE_OF_DENOMINATION){
-                if((oneDayOfUser().Currency[i] === "Byr") || (oneDayOfUser().Currency[i] === "Usd")){
+                if((StudentH.Currency[i] === "Byr") || (StudentH.Currency[i] === "Usd")){
                     WriteTransaction(transaction_Date3,transactionType, operationName, transactionNameOnly3, 
                              transactionAmount3, transactionCurrency, transactionAccount)
                 }
@@ -636,14 +625,14 @@ function makeYearlyTransactionsSixTimes(start_Day, last_Day, Year){
             // use all this variables);//we write a transaction and only we need to give a random name for it
 
             if(transaction_Date4 >= DATE_OF_DENOMINATION){
-                if((oneDayOfUser().Currency[i] === "Byn") || (oneDayOfUser().Currency[i] === "Usd")){
+                if((StudentH.Currency[i] === "Byn") || (StudentH.Currency[i] === "Usd")){
                     WriteTransaction(transaction_Date4,transactionType, operationName, transactionNameOnly4, 
                              transactionAmount4, transactionCurrency, transactionAccount)
                 }
             }
 
             if(transaction_Date4 < DATE_OF_DENOMINATION){
-                if((oneDayOfUser().Currency[i] === "Byr") || (oneDayOfUser().Currency[i] === "Usd")){
+                if((StudentH.Currency[i] === "Byr") || (StudentH.Currency[i] === "Usd")){
                     WriteTransaction(transaction_Date4,transactionType, operationName, transactionNameOnly4, 
                              transactionAmount4, transactionCurrency, transactionAccount)
                 }
@@ -653,14 +642,14 @@ function makeYearlyTransactionsSixTimes(start_Day, last_Day, Year){
             // use all this variables);//we write a transaction and only we need to give a random name for it
 
             if(transaction_Date5 >= DATE_OF_DENOMINATION){
-                if((oneDayOfUser().Currency[i] === "Byn") || (oneDayOfUser().Currency[i] === "Usd")){
+                if((StudentH.Currency[i] === "Byn") || (StudentH.Currency[i] === "Usd")){
                     WriteTransaction(transaction_Date5,transactionType, operationName, transactionNameOnly5, 
                              transactionAmount5, transactionCurrency, transactionAccount)
                 }
             }
 
             if(transaction_Date5 < DATE_OF_DENOMINATION){
-                if((oneDayOfUser().Currency[i] === "Byr") || (oneDayOfUser().Currency[i] === "Usd")){
+                if((StudentH.Currency[i] === "Byr") || (StudentH.Currency[i] === "Usd")){
                     WriteTransaction(transaction_Date5,transactionType, operationName, transactionNameOnly5, 
                              transactionAmount5, transactionCurrency, transactionAccount)
                 }
@@ -670,14 +659,14 @@ function makeYearlyTransactionsSixTimes(start_Day, last_Day, Year){
             // use all this variables);//we write a transaction and only we need to give a random name for it
 
             if(transaction_Date6 >= DATE_OF_DENOMINATION){
-                if((oneDayOfUser().Currency[i] === "Byn") || (oneDayOfUser().Currency[i] === "Usd")){
+                if((StudentH.Currency[i] === "Byn") || (StudentH.Currency[i] === "Usd")){
                     WriteTransaction(transaction_Date6,transactionType, operationName, transactionNameOnly6, 
                              transactionAmount6, transactionCurrency, transactionAccount)
                 }
             }
 
             if(transaction_Date6 < DATE_OF_DENOMINATION){
-                if((oneDayOfUser().Currency[i] === "Byr") || (oneDayOfUser().Currency[i] === "Usd")){
+                if((StudentH.Currency[i] === "Byr") || (StudentH.Currency[i] === "Usd")){
                     WriteTransaction(transaction_Date6,transactionType, operationName, transactionNameOnly6, 
                              transactionAmount6, transactionCurrency, transactionAccount)
                 }
@@ -710,14 +699,14 @@ function makeWeeklyTransactions(startTimeDay, lastTimeDay){
             var transactionAccount = StudentH.Account[i];
 
             if(transaction_Date >= DATE_OF_DENOMINATION){
-                if((oneDayOfUser().Currency[i] === "Byn") || (oneDayOfUser().Currency[i] === "Usd")){
+                if((StudentH.Currency[i] === "Byn") || (StudentH.Currency[i] === "Usd")){
                     WriteTransaction(transaction_Date,transactionType, operationName, transactionNameOnly, 
                              transactionAmount, transactionCurrency, transactionAccount)
                 }
             }
 
             if(transaction_Date < DATE_OF_DENOMINATION){
-                if((oneDayOfUser().Currency[i] === "Byr") || (oneDayOfUser().Currency[i] === "Usd")){
+                if((StudentH.Currency[i] === "Byr") || (StudentH.Currency[i] === "Usd")){
                     WriteTransaction(transaction_Date,transactionType, operationName, transactionNameOnly, 
                              transactionAmount, transactionCurrency, transactionAccount)
                 }
@@ -760,42 +749,42 @@ function makeWeeklyTransactionsTriple(startTimeDay, lastTimeDay){
             var transactionAccount = StudentH.Account[i];
 
             if(transaction_Date1 >= DATE_OF_DENOMINATION){
-                if((oneDayOfUser().Currency[i] === "Byn") || (oneDayOfUser().Currency[i] === "Usd")){
+                if((StudentH.Currency[i] === "Byn") || (StudentH.Currency[i] === "Usd")){
                     WriteTransaction(transaction_Date1,transactionType, operationName, transactionNameOnly1, 
                              transactionAmount1, transactionCurrency, transactionAccount)
                 }
             }
 
             if(transaction_Date1 < DATE_OF_DENOMINATION){
-                if((oneDayOfUser().Currency[i] === "Byr") || (oneDayOfUser().Currency[i] === "Usd")){
+                if((StudentH.Currency[i] === "Byr") || (StudentH.Currency[i] === "Usd")){
                     WriteTransaction(transaction_Date1,transactionType, operationName, transactionNameOnly1, 
                              transactionAmount1, transactionCurrency, transactionAccount)
                 }
             }
 
             if(transaction_Date2 >= DATE_OF_DENOMINATION){
-                if((oneDayOfUser().Currency[i] === "Byn") || (oneDayOfUser().Currency[i] === "Usd")){
+                if((StudentH.Currency[i] === "Byn") || (StudentH.Currency[i] === "Usd")){
                     WriteTransaction(transaction_Date2,transactionType, operationName, transactionNameOnly2, 
                              transactionAmount2, transactionCurrency, transactionAccount)
                 }
             }
 
             if(transaction_Date2 < DATE_OF_DENOMINATION){
-                if((oneDayOfUser().Currency[i] === "Byr") || (oneDayOfUser().Currency[i] === "Usd")){
+                if((StudentH.Currency[i] === "Byr") || (StudentH.Currency[i] === "Usd")){
                     WriteTransaction(transaction_Date2,transactionType, operationName, transactionNameOnly2, 
                              transactionAmount2, transactionCurrency, transactionAccount)
                 }
             }
 
             if(transaction_Date3 >= DATE_OF_DENOMINATION){
-                if((oneDayOfUser().Currency[i] === "Byn") || (oneDayOfUser().Currency[i] === "Usd")){
+                if((StudentH.Currency[i] === "Byn") || (StudentH.Currency[i] === "Usd")){
                     WriteTransaction(transaction_Date3,transactionType, operationName, transactionNameOnly3, 
                              transactionAmount3, transactionCurrency, transactionAccount)
                 }
             }
 
             if(transaction_Date3 < DATE_OF_DENOMINATION){
-                if((oneDayOfUser().Currency[i] === "Byr") || (oneDayOfUser().Currency[i] === "Usd")){
+                if((StudentH.Currency[i] === "Byr") || (StudentH.Currency[i] === "Usd")){
                     WriteTransaction(transaction_Date3,transactionType, operationName, transactionNameOnly3, 
                              transactionAmount3, transactionCurrency, transactionAccount)
                 }
@@ -924,9 +913,9 @@ function runweeklyOneAndThree(startDate, finishDate){// global function runs tra
 var StudentH = oneDayOfUser();// we take this array;
 //print("StudentH = "+StudentH.Period[2]);
 
-//runMonthlyOneAndTwice("1/1/2010", "25/11/2016");//start date and final date - in my task 2016
+runMonthlyOneAndTwice("1/1/2010", "25/11/2016");//start date and final date - in my task 2016
 
-//runYearlyThreeAndSix("1/1/2010", "25/101/2016");//start date and final date - in my task 2016
+runYearlyThreeAndSix("1/1/2010", "25/101/2016");//start date and final date - in my task 2016
 
 runweeklyOneAndThree("1/1/2010", "25/11/2016");//start date and final date - in my task 2016
 
