@@ -697,9 +697,9 @@ function makeWeeklyTransactions(startTimeDay, lastTimeDay){
         	(StudentH.Period[i] === "Week") && 
             (StudentH.Rate[i] === 1)){
 
-            /*var transactionTimeDay = Math.floor(Math.random()*(lastTimeDay - startTimeDay) + startTimeDay);
+            var transactionTimeDay = Math.floor(Math.random()*(lastTimeDay - startTimeDay) + startTimeDay);
             var transaction_Date = new Date();
-            transaction_Date.setTime(transactionTimeDay*1000*60*60*24);// Data object format*/
+            transaction_Date.setTime(transactionTimeDay*1000*60*60*24);// Data object format
             var transactionAmount = RandomAmount(StudentH.AmountMin[i], StudentH.AmountMax[i],StudentH.Currency[i])//returns  amount
             var Number_of_the_name_of_transaction = Math.floor((Math.random()*NUMBER_OF_CATEGORY_NAMES));//0...NUMBER-1
             var operationName =  StudentH.OperationName[i]
@@ -709,7 +709,7 @@ function makeWeeklyTransactions(startTimeDay, lastTimeDay){
             var transactionCurrency = StudentH.Currency[i];
             var transactionAccount = StudentH.Account[i];
 
-            /*if(transaction_Date >= DATE_OF_DENOMINATION){
+            if(transaction_Date >= DATE_OF_DENOMINATION){
                 if((oneDayOfUser().Currency[i] === "Byn") || (oneDayOfUser().Currency[i] === "Usd")){
                     WriteTransaction(transaction_Date,transactionType, operationName, transactionNameOnly, 
                              transactionAmount, transactionCurrency, transactionAccount)
@@ -721,7 +721,7 @@ function makeWeeklyTransactions(startTimeDay, lastTimeDay){
                     WriteTransaction(transaction_Date,transactionType, operationName, transactionNameOnly, 
                              transactionAmount, transactionCurrency, transactionAccount)
                 }
-            }*/
+            }
         }          
 	}
 }
@@ -734,14 +734,14 @@ function makeWeeklyTransactionsTriple(startTimeDay, lastTimeDay){
         	(StudentH.Period[i] === "Week") && 
             (StudentH.Rate[i] === 3)){
 
-            /*var transactionTimeDays = makeThreeRandom(startTimeDay, lastTimeDay);// 
+            var transactionTimeDays = makeThreeRandom(startTimeDay, lastTimeDay);// 
             // we have transactionTimeDays[0] to transactionTimeDays[2];
             var transaction_Date1 = new Date();
             transaction_Date1.setTime(transactionTimeDays[0]*1000*60*60*24);// Data object format
             var transaction_Date2 = new Date();
             transaction_Date2.setTime(transactionTimeDays[1]*1000*60*60*24);// Data object format
             var transaction_Date3 = new Date();
-            transaction_Date3.setTime(transactionTimeDays[2]*1000*60*60*24);// Data object format*/
+            transaction_Date3.setTime(transactionTimeDays[2]*1000*60*60*24);// Data object format
             // we have transaction_Date1...transaction_Date3
 
             var transactionAmount1 = RandomAmount(StudentH.AmountMin[i], StudentH.AmountMax[i],StudentH.Currency[i])//returns  amount
@@ -759,7 +759,7 @@ function makeWeeklyTransactionsTriple(startTimeDay, lastTimeDay){
             var transactionCurrency = StudentH.Currency[i];
             var transactionAccount = StudentH.Account[i];
 
-            /*if(transaction_Date1 >= DATE_OF_DENOMINATION){
+            if(transaction_Date1 >= DATE_OF_DENOMINATION){
                 if((oneDayOfUser().Currency[i] === "Byn") || (oneDayOfUser().Currency[i] === "Usd")){
                     WriteTransaction(transaction_Date1,transactionType, operationName, transactionNameOnly1, 
                              transactionAmount1, transactionCurrency, transactionAccount)
@@ -799,7 +799,7 @@ function makeWeeklyTransactionsTriple(startTimeDay, lastTimeDay){
                     WriteTransaction(transaction_Date3,transactionType, operationName, transactionNameOnly3, 
                              transactionAmount3, transactionCurrency, transactionAccount)
                 }
-            }*/
+            }
         }          
 	}
 }
@@ -922,7 +922,7 @@ function runweeklyOneAndThree(startDate, finishDate){// global function runs tra
 /*--------------------- this three functions run three periods of transactions - month, year, week -----------------*/
 
 var StudentH = oneDayOfUser();// we take this array;
-print("StudentH = "+StudentH.Period[2]);
+//print("StudentH = "+StudentH.Period[2]);
 
 //runMonthlyOneAndTwice("1/1/2010", "25/11/2016");//start date and final date - in my task 2016
 
