@@ -3,27 +3,12 @@ var NUMBER_OF_CATEGORY_NAMES = 4;//how many names are in one category
 var DATE_OF_DENOMINATION = new Date("2016-07-01");//the date of denomination, the constants
 var WEEK = 7;//days in a week
 
-function randomUsd(min, max){
-    var minCent = min*100;
-    var maxCent = max*100;
-    var amount = Math.floor(Math.random()*(maxCent-minCent) + minCent);
-    return amount/100;// we work with cents
+function randomMoney(min, max){
+    var amount = Math.floor(Math.random()*(max-min) + min);
+    return amount;
 }
 
-function randomByn(min, max){
-    var minByn = min*100;
-    var maxByn = max*100;
-    var amount =  Math.floor(Math.random()*(maxByn-minByn) + minByn);
-    return amount/100; // we work with cents
-}
 
-function randomByr(min, max){
-    var minByr = min/100;
-    var maxByr = max/100;
-    var amount = Math.floor(Math.random()*(maxByr - minByr) + minByr);
-    return amount*100; // we work with 100 rub minimum
-
-}
 
 function oneDayOfUser(){// we parse all transaction list
     var i = 1, 
@@ -92,21 +77,7 @@ function plusWeek(nowDay){// function finds a period in 1 week for a transaction
   /* print(new Date(2016,12,0).getDate());*/
 function RandomAmount(AmountMin, AmountMax, Currency){
     var result ;
-    var AmountMin = AmountMin,
-        AmountMax = AmountMax,
-        Currency = Currency;//we will return a result only, we do not need to return currency
-    print("currency= "+Currency);
-    switch(Currency){
-        case "Usd":
-            result = randomUsd(AmountMin, AmountMax);break;
-        
-        case "Byr":
-            result = randomByr(AmountMin, AmountMax);break;
-        
-        case "Byn":
-            result = randomByn(AmountMin, AmountMax);break;
-        
-    }
+        result = randomMoney(AmountMin, AmountMax);
     return result;
 }//RandomAmount returns random result 
 
