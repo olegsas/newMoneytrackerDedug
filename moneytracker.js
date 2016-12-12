@@ -57,8 +57,9 @@ function standartDate(anyDay){// this function normalize string date into a Date
     
     var anyDATE = new Date();
         anyDATE.setFullYear(anyDayA[2]);// A means Array
-        anyDATE.setMonth(anyDayA[1]-1);// we have months in range of 0...11
-        anyDATE.setDate(anyDayA[0]);// anyDATE is in a correct format
+        anyDATE.setMonth(anyDayA[0]-1);// we have months in range of 0...11
+        anyDATE.setDate(anyDayA[1]);// anyDATE is in a correct format
+        // we use format m/y/dddd
 
     
     return anyDATE;
@@ -263,7 +264,7 @@ function makeMonthlyTransactionsTwice(start_Day, finish_Day, Month, Year){
     }
 }
 
-function runMonthlyOneAndTwice(startDate, finishDate){// global function runs transaction generation
+function runMonthly(startDate, finishDate){// global function runs transaction generation
     var startDATE = standartDate(startDate);
     print("##startDATE-"+startDATE);
     
@@ -787,7 +788,7 @@ function makeWeeklyTransactionsTriple(startTimeDay, lastTimeDay){
 	}
 }
 
-function runYearlyThreeAndSix(startDate, finishDate){// global function runs transaction generation
+function runYearly(startDate, finishDate){// global function runs transaction generation
     var startDATE = standartDate(startDate);
     print("##startDATE-"+startDATE);
     
@@ -865,7 +866,7 @@ function runYearlyThreeAndSix(startDate, finishDate){// global function runs tra
     }while(cycleDATEfinish < finishDATE);
 }
 
-function runweeklyOneAndThree(startDate, finishDate){// global function runs transaction generation
+function runWeekly(startDate, finishDate){// global function runs transaction generation
     var startDATE = standartDate(startDate);
     var startTimeDay = Math.floor(startDATE.getTime()/(1000*60*60*24));// we find a day since the zero point
     // we do not need to use start_Day, start_Month, start_Year
@@ -907,9 +908,10 @@ function runweeklyOneAndThree(startDate, finishDate){// global function runs tra
 var StudentH = oneDayOfUser();// we take this array;
 //print("StudentH = "+StudentH.Period[2]);
 
-runMonthlyOneAndTwice("1/1/2010", "25/11/2016");//start date and final date - in my task 2016
+function runAll(begin, end){
+    runYearly(begin, end);
+    runMonthly(begin, end);
+    runWeekly(begin, end);
+}
 
-runYearlyThreeAndSix("1/1/2010", "25/101/2016");//start date and final date - in my task 2016
-
-runweeklyOneAndThree("1/1/2010", "25/11/2016");//start date and final date - in my task 2016
-
+runAll("1/1/2010", "11/25/2016");//start date and final date - in my task 2016
